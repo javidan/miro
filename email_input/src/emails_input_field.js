@@ -43,6 +43,8 @@ class EmailsInputField{
     })
 
     input.value = ""
+    
+    this.container.scrollTop = this.container.scrollHeight;
 
     return this
   }
