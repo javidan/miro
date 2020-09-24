@@ -7,19 +7,16 @@
 
   <style>
     @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+    
     body{
       font-family: "Open Sans", "sans";
     }
-    .container{
-      display:flex;
-      flex-direction: column;
-    }
+    
     .subHeader{
       margin: 5px 0 20px 0;
     }
 
     .row{
-      flex: 1;
       padding: 10px;
     }
 
@@ -31,14 +28,15 @@
     <div class="row">
       <h2>Email Inputs</h2>
       <div class="subHeader">Define container class and add input</div>
-
       <div id="emails-input1"></div>
     </div>
+
     <div class="row">
       <h2>Prepopulate</h2>
-      <div class="subHeader"></div>You can prepopulate field with emails via config</div>
+      <div class="subHeader">You can prepopulate field with emails via config</div>
       <div id="emails-input2"></div>
     </div>
+
     <div class="row">
       <h2>Events</h2>
       <div  class="subHeader">You can add events onAdd and onRemove. Following field will alert when added or removed email</div>

@@ -10,16 +10,20 @@
   display: flex;
   align-content: flex-start;
   flex-wrap: wrap;
+
   min-height: 96px;
+
   box-sizing: border-box;
   font-size: 14px;
 
-  overflow: scroll;
+  overflow: auto;
   max-height: 200px;
 
 
   &__email{
     display: flex;
+    align-self: flex-start;
+    flex: 0 0 auto;
     background-color: rgba(102, 153, 255, 0.2);
     border-radius: 100px;
     padding: 4px 10px;
@@ -37,6 +41,7 @@
 
   &__text{
     margin-right: 10px;
+    flex-grow: 1;
   }
 
   &__delete{
@@ -46,10 +51,16 @@
   }
 
   &__typer{
-    flex: 1;
+    flex-grow: 1;
     border: 0;
     box-sizing: border-box;
     outline: none;
+    padding: 6px 4px;
+    align-self: flex-start;
+
+    &::-ms-clear {
+      display: none;
+    }
   }
 }
 

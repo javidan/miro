@@ -22,6 +22,8 @@ class EmailsInputField{
 
   removeEmail(email){
     this.emails.splice(this.emails.indexOf(email), 1)
+
+    //fix in ie
     email.remove()
     this.config.onRemove(email)
   }
@@ -64,7 +66,7 @@ class EmailsInputField{
     this.setNodes()
     this.setListeners()
     
-    container.append(input)
+    container.appendChild(input)
 
     this.config.prepopulate.forEach(address => this.addEmail(address))
     return this
