@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EmailInput Demo</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+    body{
+      font-family: "Open Sans", "sans";
+    }
+    .container{
+      display:flex;
+      flex-direction: column;
+    }
+    .subHeader{
+      margin: 5px 0 20px 0;
+    }
+
+    .row{
+      flex: 1;
+      padding: 10px;
+    }
+
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <h2>Email Inputs</h2>
+      <div class="subHeader">Define container class and add input</div>
+
+      <div id="emails-input1"></div>
+    </div>
+    <div class="row">
+      <h2>Prepopulate</h2>
+      <div class="subHeader"></div>You can prepopulate field with emails via config</div>
+      <div id="emails-input2"></div>
+    </div>
+    <div class="row">
+      <h2>Events</h2>
+      <div  class="subHeader">You can add events onAdd and onRemove. Following field will alert when added or removed email</div>
+      <div id="emails-input3"></div>
+    </div>
+  </div>
+
+  
+
+  <script src="./dist/email_input.js"></script>
+
+  <script>
+
+  var inputContainerNode1 = document.querySelector('#emails-input1');
+  var emailsInput1 = EmailsInput(inputContainerNode1, {}); 
+
+
+  var inputContainerNode2 = document.querySelector('#emails-input2');
+  var emailsInput2 = EmailsInput(inputContainerNode2, {
+    prepopulate: [
+      'john@gmail.com',
+      'tomas@gmail.com',
+      'invalid.email'
+    ],
+    inputPlaceholder: 'Some different Placeholder'
+  }); 
+
+  var inputContainerNode3 = document.querySelector('#emails-input3');
+  var emailsInput3 = EmailsInput(inputContainerNode3, {
+    onAdd: function(email){
+      alert(email.emailAddress + ' added')
+    },
+    onRemove: function(email){
+      alert(email.emailAddress + ' removed')
+    }
+  }); 
+
+  </script>
+
+</body>
+</html>
