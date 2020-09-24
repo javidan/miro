@@ -309,10 +309,10 @@ template {
   justify-content: center;
 }
 .page__pane {
+  flex: 0 1 500px;
   align-self: center;
 }
 .pane {
-  max-width: 540px;
   min-width: 300px;
   margin: 10px 20px;
   overflow: hidden;
@@ -331,6 +331,9 @@ template {
   background: #F8F8F7;
   padding: 23px 50px;
   box-sizing: border-box;
+}
+.pane__emails_input {
+  height: 96px;
 }
 .pane__action {
   background-color: white;
