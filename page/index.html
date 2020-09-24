@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./index.css"/>
+  <title>Share Board</title>
+</head>
+<body>
+
+  <div class="page">
+
+    <div class="pane page__pane">
+      <div class="pane__body">
+        <h1 class="pane__heading">Share <strong>Board name</strong> with others</h1>
+  
+        <div id="emails-input2"></div>
+  
+        <div class="email_input">
+          <div class="email_input__email">
+            <div class="email_input__text">john@miro.com</div>
+            <div class="email_input__delete">
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0.8L7.2 0L4 3.2L0.8 0L0 0.8L3.2 4L0 7.2L0.8 8L4 4.8L7.2 8L8 7.2L4.8 4L8 0.8Z" fill="#050038"/>
+                </svg>
+                
+            </div>
+          </div>
+          <div class="email_input__email email_input__email--invalid">
+            <div class="email_input__text">invalid.email</div>
+            <div class="email_input__delete"><img src="./images/remove.svg" alt=""></div>
+          </div>
+          <div class="email_input__email">
+            <div class="email_input__text">mike@miro.com</div>
+            <div class="email_input__delete"><img src="./images/remove.svg" alt=""></div>
+          </div>
+          <div class="email_input__email">
+            <div class="email_input__text">alexander@miro.com</div>
+            <div class="email_input__delete"><img src="./images/remove.svg" alt=""></div>
+          </div>
+  
+          <input class="email_input__typer" placeholder="add more people..."/>
+        </div>
+      </div>
+  
+      <div class="pane__action">
+        <a class="button pane__action_button" id="add_email">Add email</a>
+        <a class="button pane__action_button" id="get_email_count">Get emails count</a>
+      </div>
+    </div>
+
+  </div>
+
+  
+</body>
+</html>
