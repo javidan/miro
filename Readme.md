@@ -1,8 +1,9 @@
 # Assignment
 
-Share board demo can be found here
+[Share board demo can be found here](https://javidan.github.io/miro/)
 
-EmailInput demo can be found here
+
+[EmailInput demo can be found here](https://javidan.github.io/miro/demo)
 
 
 ## Share Board 
