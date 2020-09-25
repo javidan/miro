@@ -101,7 +101,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(false);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".jemail_input {\n  border: 1px solid red;\n  background: white;\n  border-radius: 4px;\n  border: 1px solid #C3C2CF;\n  padding: 7px 8px;\n  display: flex;\n  align-content: flex-start;\n  flex-wrap: wrap;\n  min-height: 96px;\n  box-sizing: border-box;\n  font-size: 14px;\n  overflow: auto;\n  max-height: 200px;\n}\n.jemail_input__email {\n  display: flex;\n  align-self: flex-start;\n  flex: 0 0 auto;\n  background-color: rgba(102, 153, 255, 0.2);\n  border-radius: 100px;\n  padding: 4px 10px;\n  color: #050038;\n  margin: 0 4px 4px 0px;\n}\n.jemail_input__email--invalid {\n  padding: 4px 4px 0 4px;\n  background-color: transparent;\n  border-bottom: 1px dashed #D92929;\n  border-radius: 0;\n}\n.jemail_input__text {\n  margin-right: 10px;\n  flex-grow: 1;\n}\n.jemail_input__delete {\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n}\n.jemail_input__typer {\n  flex-grow: 1;\n  border: 0;\n  box-sizing: border-box;\n  outline: none;\n  padding: 6px 4px;\n  align-self: flex-start;\n}\n.jemail_input__typer::-ms-clear {\n  display: none;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".jemail_input {\n  background: white;\n  border-radius: 4px;\n  border: 1px solid #C3C2CF;\n  padding: 7px 8px;\n  display: flex;\n  align-content: flex-start;\n  flex-wrap: wrap;\n  min-height: 96px;\n  box-sizing: border-box;\n  font-size: 14px;\n  overflow: auto;\n  max-height: 200px;\n}\n.jemail_input__email {\n  display: flex;\n  align-self: flex-start;\n  flex: 0 0 auto;\n  background-color: rgba(102, 153, 255, 0.2);\n  border-radius: 100px;\n  padding: 4px 10px;\n  color: #050038;\n  margin: 0 4px 4px 0px;\n}\n.jemail_input__email--invalid {\n  padding: 4px 4px 0 4px;\n  background-color: transparent;\n  border-bottom: 1px dashed #D92929;\n  border-radius: 0;\n}\n.jemail_input__text {\n  margin-right: 10px;\n  flex-grow: 1;\n  line-height: normal;\n}\n.jemail_input__delete {\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n}\n.jemail_input__typer {\n  flex-grow: 1;\n  border: 0;\n  box-sizing: border-box;\n  outline: none;\n  padding: 6px 4px;\n  align-self: flex-start;\n}\n.jemail_input__typer::-ms-clear {\n  display: none;\n}\n", ""]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -516,14 +516,16 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-
+ // Email
+// Each individual email component will be managed by Email Class
 
 var Email = /*#__PURE__*/function () {
   function Email(emailAddress, onRemove, userConfig) {
     _classCallCheck(this, Email);
 
     this.emailAddress = emailAddress;
-    this.onRemove = onRemove;
+    this.onRemove = onRemove; // adding default configuration
+
     this.config = _objectSpread({
       emailClass: 'jemail_input__email',
       invalidEmailClass: 'jemail_input__email--invalid',
@@ -533,7 +535,10 @@ var Email = /*#__PURE__*/function () {
     this.containerNode = this.buildContainerNode();
     this.textNode = this.buildTextNode(this.emailAddress);
     this.removeButtonNode = this.buildRemoveNode();
-  }
+  } // Check if email valid
+  // As we can really validate email only sending email to address
+  // checking if it have @ sign
+
 
   _createClass(Email, [{
     key: "isValid",
@@ -542,9 +547,10 @@ var Email = /*#__PURE__*/function () {
     }
   }, {
     key: "remove",
-    value: function remove() {
-      this.containerNode.remove();
-    }
+    value: function remove(container) {
+      container.removeChild(this.containerNode);
+    } // Building text node
+
   }, {
     key: "buildTextNode",
     value: function buildTextNode(address) {
@@ -552,7 +558,8 @@ var Email = /*#__PURE__*/function () {
       textNode.setAttribute('class', this.config.emailTextClass);
       textNode.innerHTML = address;
       return textNode;
-    }
+    } // building delete node
+
   }, {
     key: "buildRemoveNode",
     value: function buildRemoveNode() {
@@ -576,7 +583,8 @@ var Email = /*#__PURE__*/function () {
       var containerNode = document.createElement('div');
       containerNode.setAttribute('class', className.join(' '));
       return containerNode;
-    }
+    } // Will build email and return node
+
   }, {
     key: "build",
     value: function build() {
@@ -636,6 +644,11 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
+/**
+ * EmailInputField
+ * Class which is responsible generating input field inside given container
+ * optional config also can be passed
+ */
 
 var EmailsInputField = /*#__PURE__*/function () {
   function EmailsInputField(container) {
@@ -662,10 +675,10 @@ var EmailsInputField = /*#__PURE__*/function () {
 
   _createClass(EmailsInputField, [{
     key: "removeEmail",
-    value: function removeEmail(email) {
+    value: function removeEmail(container, email) {
       this.emails.splice(this.emails.indexOf(email), 1); //fix in ie
 
-      email.remove();
+      email.remove(container);
       this.config.onRemove(email);
     }
   }, {
@@ -673,23 +686,26 @@ var EmailsInputField = /*#__PURE__*/function () {
     value: function addEmail(address) {
       var _this = this;
 
-      var emails = this.emails,
-          input = this.input;
+      var input = this.input; // get list of emails, split by comma and trim the whitespaces
+
       var addresses = address.split(',').map(function (address) {
         return address.trim();
       });
       var list = addresses.map(function (address) {
-        if (address) return new _email_js__WEBPACK_IMPORTED_MODULE_0__["default"](address, _this.removeEmail.bind(_this), _this.config);
+        if (address) return new _email_js__WEBPACK_IMPORTED_MODULE_0__["default"](address, _this.removeEmail.bind(_this, _this.container), _this.config);
       }).filter(function (email) {
         return email;
       });
-      this.emails = [].concat(_toConsumableArray(this.emails), _toConsumableArray(list));
+      this.emails = [].concat(_toConsumableArray(this.emails), _toConsumableArray(list)); // get email list, create email instance for each of them
+      // and add to list of emails and DOM
+
       list.forEach(function (email) {
         _this.container.insertBefore(email.build(), _this.input);
 
         _this.config.onAdd(email);
       });
-      input.value = "";
+      input.value = ""; // If you paste emails or add them scroller will go to the bottom all the time
+
       this.container.scrollTop = this.container.scrollHeight;
       return this;
     }
@@ -697,7 +713,9 @@ var EmailsInputField = /*#__PURE__*/function () {
     key: "emailsCount",
     value: function emailsCount() {
       return this.emails.length;
-    }
+    } // main function for creating domnodes and adding them
+    // to main container
+
   }, {
     key: "build",
     value: function build() {
@@ -718,7 +736,8 @@ var EmailsInputField = /*#__PURE__*/function () {
         return _this2.addEmail(address);
       });
       return this;
-    }
+    } // Will set the classNames for container and
+
   }, {
     key: "setNodes",
     value: function setNodes() {
@@ -731,7 +750,8 @@ var EmailsInputField = /*#__PURE__*/function () {
       container.setAttribute('class', classNames);
       input.setAttribute('class', config.inputClass);
       input.setAttribute('placeHolder', config.inputPlaceholder);
-    }
+    } // Add Listeners for actions
+
   }, {
     key: "setListeners",
     value: function setListeners() {
@@ -744,12 +764,13 @@ var EmailsInputField = /*#__PURE__*/function () {
 
           e.preventDefault();
         }
-      });
-      input.addEventListener('blur', function (e) {
-        return _this3.addEmail(e.target.value);
-      });
+      }); // input.addEventListener('blur', e => this.addEmail(e.target.value))
+
       input.addEventListener('paste', function (e) {
-        _this3.addEmail(e.clipboardData.getData('text'));
+        var pastedText = '';
+        if (typeof e.clipboardData === 'undefined') pastedText = window.clipboardData.getData('Text');else pastedText = e.clipboardData.getData('text/plain');
+
+        _this3.addEmail(pastedText);
 
         e.preventDefault();
       });

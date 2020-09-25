@@ -1,5 +1,10 @@
 import Email from './email.js'
 
+/**
+ * EmailInputField
+ * Class which is responsible generating input field inside given container
+ * optional config also can be passed
+ */
 class EmailsInputField{
   
   constructor(container, userConfig={}){
@@ -20,25 +25,28 @@ class EmailsInputField{
 
   }
 
-  removeEmail(email){
+  removeEmail(container, email){
     this.emails.splice(this.emails.indexOf(email), 1)
 
     //fix in ie
-    email.remove()
+    email.remove(container)
     this.config.onRemove(email)
   }
 
   addEmail(address){
-    const {emails, input} = this
+    const {input} = this
 
+    // get list of emails, split by comma and trim the whitespaces
     const addresses = address.split(',').map(address=> address.trim())
 
     const list = addresses.map(address => {
-      if(address) return new Email(address, this.removeEmail.bind(this), this.config)
+      if(address) return new Email(address, this.removeEmail.bind(this, this.container), this.config)
     }).filter((email) => email )
 
     this.emails = [...this.emails, ...list]
 
+    // get email list, create email instance for each of them
+    // and add to list of emails and DOM
     list.forEach((email)=>{
       this.container.insertBefore(email.build(), this.input)
       this.config.onAdd(email)
@@ -46,6 +54,7 @@ class EmailsInputField{
 
     input.value = ""
     
+    // If you paste emails or add them scroller will go to the bottom all the time
     this.container.scrollTop = this.container.scrollHeight;
 
     return this
@@ -55,6 +64,8 @@ class EmailsInputField{
     return this.emails.length
   }
 
+  // main function for creating domnodes and adding them
+  // to main container
   build(){
     let {container, input} = this
 
@@ -72,6 +83,7 @@ class EmailsInputField{
     return this
   }
 
+  // Will set the classNames for container and
   setNodes(){
     let {container, input, config} = this
 
@@ -84,6 +96,7 @@ class EmailsInputField{
   }
 
 
+  // Add Listeners for actions
   setListeners(){
     const { input } = this
 
@@ -94,9 +107,16 @@ class EmailsInputField{
       }
     })
 
-    input.addEventListener('blur', e => this.addEmail(e.target.value))
+    // input.addEventListener('blur', e => this.addEmail(e.target.value))
+
     input.addEventListener('paste', e => {
-      this.addEmail(e.clipboardData.getData('text'))
+      let pastedText = '';
+      if (typeof e.clipboardData === 'undefined')
+          pastedText = window.clipboardData.getData('Text')
+      else
+          pastedText = e.clipboardData.getData('text/plain')
+          
+      this.addEmail(pastedText)
       e.preventDefault()
     })
   }

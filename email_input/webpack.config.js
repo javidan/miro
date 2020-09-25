@@ -1,12 +1,12 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'development',
+  mode: process.env.WEBPACK_ENV,
   devtool: false,
   entry: {
-    main: './src/index.js',  },
+    email_input: './src/index.js',  },
   output: {
-    filename: 'email_input.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
   module: {

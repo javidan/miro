@@ -1,11 +1,14 @@
 import removeIcon from "./icons/remove.svg";
 
+// Email
+// Each individual email component will be managed by Email Class
 class Email{
 
   constructor(emailAddress, onRemove, userConfig){
     this.emailAddress = emailAddress
     this.onRemove = onRemove
 
+    // adding default configuration
     this.config = {
       emailClass: 'jemail_input__email',
       invalidEmailClass: 'jemail_input__email--invalid',
@@ -19,14 +22,18 @@ class Email{
     this.removeButtonNode = this.buildRemoveNode()
   }
 
+  // Check if email valid
+  // As we can really validate email only sending email to address
+  // checking if it have @ sign
   isValid(){
     return this.emailAddress.indexOf('@') != -1
   }
 
-  remove(){
-    this.containerNode.remove()
+  remove(container){
+    container.removeChild(this.containerNode)
   }
 
+  // Building text node
   buildTextNode(address){
     const textNode = document.createElement("div")
     textNode.setAttribute('class', this.config.emailTextClass)
@@ -35,6 +42,7 @@ class Email{
     return textNode
   }
 
+  // building delete node
   buildRemoveNode(){
     const removeButtonNode = document.createElement('div')
     removeButtonNode.setAttribute('class', this.config.deleteButtonClass)
@@ -60,6 +68,7 @@ class Email{
     return containerNode
   }
 
+  // Will build email and return node
   build(){
     const { containerNode, removeButtonNode, textNode } = this
 
