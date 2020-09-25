@@ -28,6 +28,8 @@ demo can be found here
 
 ## Input Emails
 
+For EmailInput component please check `/email_input` folder
+
 Input emails can be used as simplest like
 
 ```html
