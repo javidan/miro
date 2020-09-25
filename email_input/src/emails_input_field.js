@@ -14,8 +14,8 @@ class EmailsInputField{
       containerClass: 'jemail_input',
       inputClass: 'jemail_input__typer',
       inputPlaceholder: 'add more people...',
-      onAdd: (email) => {console.log(email, ' removed')},
-      onRemove: (email) => {console.log(email, ' added')},
+      onAdd: (email) => {},
+      onRemove: (email) => {},
       prepopulate: [],
       ...userConfig
     }
@@ -107,7 +107,7 @@ class EmailsInputField{
       }
     })
 
-    // input.addEventListener('blur', e => this.addEmail(e.target.value))
+    input.addEventListener('blur', e => this.addEmail(e.target.value))
 
     input.addEventListener('paste', e => {
       let pastedText = '';
